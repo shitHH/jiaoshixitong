@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.crbs.dao.IAdminDao">
+    <!--作者：李晓斌
+   时间：2021年3月12日
+   内容：数据库执行语句-->
+    <select id="selectAllAdmin" resultType="com.crbs.bean.Admin">
+        select * from admin
+    </select>
+    <select id="selectAdminByAid" resultType="com.crbs.bean.Admin">
+        select * from admin where aid=#{aid}
+    </select>
+    <select id="selectAdminlistByAid" resultType="com.crbs.bean.Admin">
+        select * from admin where aid like '${aid}%'
+    </select>
+    <select id="selectAdminByAname" resultType="com.crbs.bean.Admin">
+        select * from admin where aname=#{aname}
+    </select>
+    <select id="selectAdminlistByAname" resultType="com.crbs.bean.Admin">
+        select * from admin where aname like '${aname}%'
+    </select>
+    <insert id="addAdmin" parameterType="com.crbs.bean.Admin">
+        INSERT INTO admin(aid,aname,asex,aage,atel,apass) VALUES(#{aid},#{aname},#{asex},#{aage},#{atel},#{apass})
+    </insert>
+    <update id="updateAdmin" >
+        update admin set aname=#{aname},asex=#{asex},aage=#{atel},atel=#{atel},apass=#{apass} where aid=#{aid}
+    </update>
+    <delete id="deleteAdminByAid">
+        delete from admin where aid=#{aid}
+    </delete>
+    <select id="find" resultType="com.crbs.bean.Admin">
+        select * from admin where atel=#{atel} and apass=#{apass}
+    </select>
+    <select id="selectAdminByAtel" resultType="com.crbs.bean.Admin">
+        select * from admin where atel=#{atel}
+    </select>
+</mapper>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.crbs.dao.IBorrowDao">
+    <!--查询所有的借用记录列表-->
+<select id="findAll" resultType="com.crbs.bean.Borrow">
+    select * from borrow
+</select>
+<!--根据用户id查询用户使用记录-->
+    <select id="findByUid" resultType="com.crbs.bean.Borrow">
+        select * from borrow where uid = #{uid}
+    </select>
+<!--根据房间id查询房间的使用记录-->
+    <select id="findByRid" resultType="com.crbs.bean.Borrow">
+        select * from borrow where rid=#{room.rid}
+    </select>
+<!--根据教室状态查询房间使用记录-->
+    <select id="findBySta" resultType="com.crbs.bean.Borrow">
+        select * from borrow where status= #{status}
+    </select>
+<!--更新教室借用记录-->
+    <update id="update">
+        UPDATE borrow SET uid = #{uid},rid =#{rid} ,starttime = #{starttime} , endtime=#{endtime},inputtime =#{inputtime}  WHERE bid=#{bid}
+    </update>
+    <!--添加教室借用记录-->
+    <update id="add">
+        insert into borrow (uid,rid,starttime,endtime,inputtime) values (#{uid},#{rid},#{starttime},#{endtime},#{inputtime})
+    </update>
+    <!--删除教室借用记录-->
+    <delete id="delete">
+        delete from borrow where bid = #{bid}
+    </delete>
+    <!--更改教室的借用状态-->
+    <update id="updateSta">
+        UPDATE borrow SET status = #{status}  WHERE bid=#{bid}
+    </update>
+    <!--通过借用表编号查询借用表信息-->
+    <select id="findBorrowByBid" resultType="com.crbs.bean.Borrow">
+        select * from borrow where bid = #{bid}
+    </select>
+</mapper>

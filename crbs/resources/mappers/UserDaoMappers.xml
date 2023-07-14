@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.crbs.dao.IUserDao">
+    <!--作者：王永祺
+    时间：2021年3月12日
+    内容：数据库执行语句-->
+<!--  查询所有的用户列表  -->
+    <select id="findAllUser" resultType="com.crbs.bean.User">
+        select * from user
+    </select>
+<!--   用户根据手机号和密码查询用户 -->
+    <select id="findUserBytp" resultType="com.crbs.bean.User">
+        SELECT * FROM `user` WHERE utel=#{param1} AND upass=#{param2}
+    </select>
+    <select id="findUserBytel" resultType="com.crbs.bean.User">
+        select * from `user` where utel= #{utel}
+    </select>
+<!--  通过姓名模糊查询用户个体  -->
+    <select id="findUserlistByname" resultType="com.crbs.bean.User">
+        SELECT * FROM `user` WHERE uname like '${uname}%'
+    </select>
+    <select id="findUserByname" resultType="com.crbs.bean.User">
+        SELECT * FROM `user` WHERE uname =#{uname}
+    </select>
+<!--  通过uid查询用户个体  -->
+    <select id="findUserByuid" resultType="com.crbs.bean.User">
+        SELECT * FROM `user` WHERE uid =#{uid}
+    </select>
+    <!--  通过uid模糊查询用户集合  -->
+    <select id="findUserBylistuid" resultType="com.crbs.bean.User">
+        SELECT * FROM `user` WHERE uid like '${uid}%'
+    </select>
+<!--    通过用户个体信息增加用户-->
+    <insert id="addUser">
+        INSERT INTO `user`( uname,usex,uage,utel,upass) VALUES (#{uname},#{usex},#{uage},#{utel},#{upass});
+    </insert>
+<!--    删除用户信息-->
+    <delete id="deleteUser">
+        delete from `user` where  uid=#{uid}
+    </delete>
+<!--    更新用户信息-->
+    <update id="updateUser">
+        update user set uname=#{uname},usex=#{usex},uage=#{uage},utel=#{utel},upass=#{upass} where uid=#{uid}
+    </update>
+</mapper>

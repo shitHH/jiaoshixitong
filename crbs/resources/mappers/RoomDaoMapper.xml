@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.crbs.dao.IroomDao">
+    <!--作者：李龙
+    时间：2021年3月12日
+    内容：数据库执行语句-->
+    <select id="findAll" resultType="com.crbs.bean.Room">
+     select * from room
+ </select>
+    <select id="findBystatus" resultType="com.crbs.bean.Room">
+    SELECT * FROM room WHERE status =#{status}
+ </select>
+    <select id="findBySize" resultType="com.crbs.bean.Room">
+    SELECT * FROM room WHERE size =#{size}
+ </select>
+    <select id="findByrname" resultType="com.crbs.bean.Room">
+    SELECT * FROM room WHERE rname=#{rname}
+ </select>
+    <select id="findByrid" resultType="com.crbs.bean.Room">
+    SELECT * FROM room WHERE rid=#{rid}
+ </select>
+    <select id="queryByTrim" resultType="com.crbs.bean.Room">
+        select * from room
+        <trim prefix="where" prefixOverrides="AND|OR">
+            <if test="size != null">
+                and size=#{size}
+            </if>
+            <if test="status != null">
+                and status=#{status}
+            </if>
+        </trim>
+    </select>
+    <!--classroom 数据更新语句-->
+    <update id="update">
+    UPDATE room
+    <set>
+        <if test="rname!=null">rname=#{rname},</if>
+        <if test="size!=null">size = #{size},</if>
+        <if test="status!=null">status = #{status}</if>
+    </set>
+WHERE rid = #{rid};
+</update>
+    <!--classroom 数据更新语句结束-->
+
+ <delete id="deleteRoom">
+
+     delete from room where rid=#{rid}
+
+ </delete>
+<insert id="insertRoom">
+
+    insert into room (rname,size,status)values (#{rname},#{size},#{status})
+
+
+</insert>
+
+
+</mapper>

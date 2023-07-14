@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--作者：李英
+    时间：2021年3月15日17:43:08
+    描述：borrowVO的sql语句-->
+<mapper namespace="com.crbs.dao.IBorrowVODao">
+<!--查找所有的borrowVO对象-->
+    <select id="findAll" resultType="com.crbs.vo.BorrowVO">
+SELECT b.`bid`,r.`rid`,r.`rname`,r.`size`,u.`uid`,u.`uname`,u.`utel`,b.`starttime`,b.`endtime`,b.`inputtime`,b.`status`
+FROM borrow b,room r,`user` u WHERE b.`rid`=r.`rid` AND b.`uid`=u.`uid`
+    </select>
+</mapper>
